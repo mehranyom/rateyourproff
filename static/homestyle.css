@@ -1,0 +1,31 @@
+/* Custom background image and size */
+.bg-image {
+    background-image: url('./banner.jpg'); /* Path to the background image */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* 100% of the viewport height */
+}
+
+/* Overlay effect (mask) */
+.mask {
+    background-color: rgba(0, 7, 30, 0.75); /* Dark transparent overlay */
+    height: 100%; /* Full height of the parent container */
+}
+
+.ms-n5 {
+    margin-left: -40px;
+}
+
+.search-bar {
+    border-radius: 10rem;
+    background: #fff;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .15);
+}
+.search-bar .form-control {
+    height: calc(2em + 1rem + calc(var(--bs-border-width)* 2));
+}
+
+.form-control:focus {
+    box-shadow: none;
+}

@@ -1,12 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="card text-bg-dark">
-      <img src="https://da678dd1-1531-47b1-b990-6d2b56eaa29e-00-xfkwo11nsoyg.spock.replit.dev/static/banner.jpg"                 class="card-img" alt="...">
-      <div class="card-img-overlay">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.           This content is a little bit longer.</p>
-        <p class="card-text"><small>Last updated 3 mins ago</small></p>
+  <link rel="stylesheet" href="https://da678dd1-1531-47b1-b990-6d2b56eaa29e-00-xfkwo11nsoyg.spock.replit.dev/static/homestyle.css">
+  <section class="text-center bg-image">
+    <div class="mask">
+      <div class="container d-flex justify-content-center flex-column mb-3 h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Heading Heading Heading Heading</h1>  
+          <h4 class="mb-3">Subheading</h4>
+          </div>
+        <div class= "search-bar mt-5 p-3 p-lg-1 ps-lg-4 mx-auto" style="width: 70% ;">
+          <div class="row">
+            <div class="d-flex align-items-center form-group col-lg-10">
+              <input name="search" placeholder="What are you searching for?" type="text" class="border-0 shadow-0 form-control">
+            </div>
+            <div class="d-grid  col-lg-2"><button type="submit" class="h-100 rounded-pill btn btn-primary">Search</button></div>
+          </div>
+        </div>
+        
+        <!-- <div class="input-group input-group-lg mx-auto" style="width: 50%;">
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder= "search">
+          </div> -->
+        </div>
       </div>
     </div>
-{% endblock %}    
+  </section>
+  <div>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  </div>
+{% endblock %}
