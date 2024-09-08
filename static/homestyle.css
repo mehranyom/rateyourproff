@@ -1,31 +1,73 @@
 /* Custom background image and size */
 .bg-image {
-    background-image: url('./banner.jpg'); /* Path to the background image */
-    background-size: cover; /* Ensures the image covers the entire div */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    height: 100vh; /* 100% of the viewport height */
+    background-image: url('./banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 /* Overlay effect (mask) */
 .mask {
-    background-color: rgba(0, 7, 30, 0.75); /* Dark transparent overlay */
-    height: 100%; /* Full height of the parent container */
+    background-color: rgba(0, 7, 30, 0.75);
+    height: 100%;
+    width: 100%;
 }
 
-.ms-n5 {
-    margin-left: -40px;
-}
-
+/* Styling for search bar */
+/* Styling for search bar */
 .search-bar {
     border-radius: 10rem;
     background: #fff;
     box-shadow: 0 0 1rem rgba(0, 0, 0, .15);
-}
-.search-bar .form-control {
-    height: calc(2em + 1rem + calc(var(--bs-border-width)* 2));
+    padding: 0.5rem;
+    max-width: 700px;
+    width: 100%;
 }
 
-.form-control:focus {
-    box-shadow: none;
+/* Circular Button */
+.search-bar .btn {
+    border-radius: 50%;
+    width: 4rem; /* Adjust width */
+    height: 3.5rem; /* Adjust height to match width */
+    padding: 0;
+    display: inline-flex; /* Ensures button remains circular */
+    justify-content: center;
+    align-items: center;
+}
+
+/* SVG Icon size */
+.search-bar .btn svg {
+    width: 16px; /* Adjust SVG icon size as needed */
+    height: 16px;
+}
+
+.form-control{
+    --bs-border-radius: 2.5rem;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-bar {
+        padding: 0.5rem;
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, .1);
+    }
+
+    .search-bar .btn {
+        width: 3.5rem;
+        height: 3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .search-bar {
+        padding: 0.25rem;
+    }
+
+
+    .search-bar .btn {
+        width: 3rem;
+        height: 2.5rem;
+    }
 }

@@ -1,26 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <link rel="stylesheet" href="https://da678dd1-1531-47b1-b990-6d2b56eaa29e-00-xfkwo11nsoyg.spock.replit.dev/static/homestyle.css">
+  <link rel="stylesheet" href="./static/homestyle.css">
   <section class="text-center bg-image">
     <div class="mask">
-      <div class="container d-flex justify-content-center flex-column mb-3 h-100">
+      <div class="container d-flex justify-content-center align-items-center flex-column mb-3 h-100">
         <div class="text-white">
           <h1 class="mb-3">Heading Heading Heading Heading</h1>  
           <h4 class="mb-3">Subheading</h4>
-          </div>
-        <div class= "search-bar mt-5 p-3 p-lg-1 ps-lg-4 mx-auto" style="width: 70% ;">
-          <div class="row">
-            <div class="d-flex align-items-center form-group col-lg-10">
-              <input name="search" placeholder="What are you searching for?" type="text" class="border-0 shadow-0 form-control">
-            </div>
-            <div class="d-grid  col-lg-2"><button type="submit" class="h-100 rounded-pill btn btn-primary">Search</button></div>
-          </div>
         </div>
-        
-        <!-- <div class="input-group input-group-lg mx-auto" style="width: 50%;">
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder= "search">
-          </div> -->
+        <div class="search-bar mt-5 mx-auto">
+          <div class="d-flex">
+            <input name="search" placeholder="What are you searching for?" type="text" class="form-control border-0 shadow-0">
+            <button type="submit" class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center ms-2">
+              <!-- SVG Icon always visible -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
