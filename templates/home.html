@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <link rel="stylesheet" href="./static/homestyle.css">
+  <link rel="stylesheet" href="./static/css/homestyle.css">
   <section class="text-center bg-image">
     <div class="mask">
       <div class="container d-flex justify-content-center align-items-center flex-column mb-3 h-100">
         <div class="text-white">
-          <h1 class="mb-3">Heading Heading Heading Heading</h1>  
-          <h4 class="mb-3">Subheading</h4>
+          <h1 class="mb-3">Rate Your Professor</h1>  
+          <h4 class="mb-3">find your professor and grade him</h4>
         </div>
-        <div class="search-bar mt-5 mx-auto">
+        <div class="search-bar mt-5 mx-auto position-relative">
           <div class="d-flex">
-            <input name="search" placeholder="What are you searching for?" type="text" class="form-control border-0 shadow-0">
-            <button type="submit" class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center ms-2">
+            <!-- Search input -->
+            <input id="search-box" name="search" placeholder="What are you searching for?" type="text" class="form-control border-0 shadow-0" autocomplete="off">
+            <button type="button" id="search-button" class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center ms-2">
               <!-- SVG Icon always visible -->
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
               </svg>
             </button>
           </div>
+          
+          <!-- Suggestions list -->
+          <ul id="suggestions" class="list-group"></ul>
         </div>
       </div>
     </div>
@@ -29,4 +33,5 @@
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
   </div>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
