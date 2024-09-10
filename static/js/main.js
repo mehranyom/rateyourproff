@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let suggestions = document.getElementById('suggestions');
     let searchBox = document.getElementById('search-box');
     let searchButton = document.getElementById('search-button');
-
-    // Function to clear suggestions
+    let suggestionBg = document.querySelector('.suggestion-bg'); // Assuming this targets a single element
+    
+    // Function to clear suggestions and suggestion background
     function clearSuggestions() {
         suggestions.innerHTML = ''; // Clear suggestions
         suggestions.classList.remove('active'); // Hide suggestion list
+        suggestionBg.classList.remove('active'); // Hide suggestion background
     }
 
     // Function to hide suggestions if clicked outside
@@ -38,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             suggestions.appendChild(li);
                         });
                         suggestions.classList.add('active'); // Show suggestions
+                        suggestionBg.classList.add('active'); // Show suggestion background
                     } else {
                         clearSuggestions(); // Hide suggestions if none
                     }

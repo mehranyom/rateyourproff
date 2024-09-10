@@ -11,6 +11,5 @@ def load_professors_from_db():
     with engine.connect() as conn:
         result = conn.execute(text("select * from professors"))
         result_all = result.mappings().all()
-        print(result_all)
         return result_all
     
