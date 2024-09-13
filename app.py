@@ -1,9 +1,10 @@
 from flask import Flask, render_template, jsonify, request
 from database import load_professors_from_db
-
+from flask_breadcrumbs import Breadcrumbs, register_breadcrumb
 app = Flask(__name__)
 
 @app.route('/')
+@register_breadcrumb(app, '.', 'Home')
 def HomePage():
     return render_template('home.html', title="RateYourProfessor")
 
@@ -38,11 +39,17 @@ def professor_page(pid):
     professors = load_professors_from_db()
     # Find the professor by PID
     professor = next((prof for prof in professors if prof['PID'] == pid), None)
-    
+    name = professor["Name"]
+    title = professor["Title"]
+    department = professor["Department"]
+    imagesrc = professor["Image"]
     if professor:
-        return f"Welcome to {professor['Name']}'s page!"
+        return render_template("profile.html", professor_name= name, professor_title= title, professor_department = department, professor_image = imagesrc)
     else:
         return "Professor not found", 404
+    
+# @app.route('/department')
+# def 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
