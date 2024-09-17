@@ -1,10 +1,15 @@
 from flask import Flask, render_template, jsonify, request
-from database import load_professors_from_db
+from database import load_professors_from_db, store_rating_into_db
 from flask_breadcrumbs import Breadcrumbs, register_breadcrumb
 app = Flask(__name__)
 
+
+professor_rate = [
+    ('r1', 5),
+    ('r2', 7),
+    ('r3', 12)
+]
 @app.route('/')
-@register_breadcrumb(app, '.', 'Home')
 def HomePage():
     return render_template('home.html', title="RateYourProfessor")
 
@@ -34,8 +39,26 @@ def results():
     return f"Results for {query}"
 
 # Direct page route for selected professor using the PID
-@app.route('/professor/<pid>')
+@app.route('/professor/<pid>', methods = ['GET', 'POST'])
 def professor_page(pid):
+    if request.method == 'POST':
+        teaching_quality = request.form.get('rating1')
+        grading = request.form.get('rating2')
+        ethic = request.form.get('rating3')
+        teaching_load = request.form.get('rating4')
+
+        # Process or store the ratings
+        if teaching_quality and grading and ethic and teaching_load:
+            # Example: Storing the ratings in a dictionary or sending it to a database
+            ratings = {
+                'teaching_quality': int(teaching_quality),
+                'grading': int(grading),
+                'ethic': int(ethic),
+                'teaching_load': int(teaching_load)
+            }
+            
+            store_rating_into_db(pid, ratings)
+            return "thanks for submitting"
     professors = load_professors_from_db()
     # Find the professor by PID
     professor = next((prof for prof in professors if prof['PID'] == pid), None)
@@ -50,6 +73,14 @@ def professor_page(pid):
     
 # @app.route('/department')
 # def 
+
+survay = dict()
+@app.route('/survey')
+def survey():
+    labels = [row[0] for row in professor_rate]
+    values = [row[1] for row in professor_rate]
+    
+    return render_template('survey.html', labels = labels, values = values)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

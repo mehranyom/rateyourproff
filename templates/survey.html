@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Link to Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+  <!-- Chart Container -->
+  <canvas id="BarChart" width="900" height="450"></canvas>
+
+  <!-- Custom Styles for Chart Labels and Bars -->
+  <style>
+    .chart-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+    .chart-bar {
+      background-color: rgba(75, 192, 192, 0.2);
+      border-color: rgba(75, 192, 192, 1);
+      border-width: 1;
+    }
+  </style>
+
+  <!-- Chart Script -->
+  <script>
+    const ctx = document.getElementById('BarChart');
+  
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ labels | safe }},
+        datasets: [{
+          label: '# of Votes',
+          data: {{ values | safe }},
+          backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-bar-bg') || 'rgba(75, 192, 192, 0.2)',
+          borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-bar-border') || 'rgba(75, 192, 192, 1)',
+          borderWidth: getComputedStyle(document.documentElement).getPropertyValue('--chart-bar-border-width') || 1,
+        }]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          x: {
+            ticks: {
+              minRotation: 90,
+              maxRotation: 90,
+              font: {
+                size: parseInt(getComputedStyle(document.documentElement).getPropertyValue('--chart-label-font-size')) || 14,
+                family: getComputedStyle(document.documentElement).getPropertyValue('--chart-label-font-family') || 'Arial',
+                weight: getComputedStyle(document.documentElement).getPropertyValue('--chart-label-font-weight') || 'bold',
+                color: getComputedStyle(document.documentElement).getPropertyValue('--chart-label-font-color') || '#333',
+              },
+            }
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+{% endblock %}
