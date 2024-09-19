@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/professor.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="metrics row">
+            {% for field in form %}
+                {% if "rating" in field.name %}
+                <div class="metric row">
+                    <div class="row">
+                        <span class="metric-name">{{field.label.text}}</span>              
+                    </div>
+                    <div class="row">
+                        <div class="col-2 col-xs-push-10">
+                            <p class="bottom-bound">{{field.description['lowest_label']}}</p>
+                        </div>
+                        <div class="col-8 rating-container">
+                            <fieldset class="rating">
+                                {% for subfield in field %}
+                                <label for="{{ subfield.id }}" title="{{ subfield.label.text }}">
+                                    {{ subfield }}
+                                    <span>{{ subfield.label.text }}</span>
+                                </label>
+                                {% endfor %}
+                            </fieldset>
+                            <hr>
+                        </div>
+                        <div class="col-2 col-xs-pull-10">
+                            <p class="upper-bound">{{field.description['highest_label']}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="form-field">
+            <div class="tag-attributes">
+                <div class="ta-center row">
+                    <span class="ta-page-info">
+                      <b>
+                        <span id="ta-page_number">1</span> / <span id="ta-num_pages">18</span>
+                      </b>
+                    </span>
+                </div>
+                {% for field in form %}
+                    {% if "personality" in field.name %}
+                        <div class="ta-slide" data-page="{{field.description['data-page']}}" style="{{'display:block;' if loop.index == 5 else 'display:none;'}}">
+                            <div class="row ta-question-row">
+                            <div class="col-1 col-xs-push-11 ta-arrow">
+                                <a class="ta-arrow-left {{'disabled' if loop.index == 5}}">
+                                <div class="icon-ta-arrow-left"></div>
+                                </a>
+                            </div>
+                            <div class="col-10 ta-center">
+                                <div>
+                                <span class="ta-question"> {{field.label.text}} </span>
+                                </div>
+                            </div>
+                            <div class="col-1 col-xs-pull-11 ta-arrow">
+                                <a class="ta-arrow-right {{'disabled' if loop.index == 18}}">
+                                <div class="icon-ta-arrow-right"></div>
+                                </a>
+                            </div>
+                            </div>
+                            <div class="ta-answer-row">
+                            <div class="ta-answer-box row">
+                                {% for subfield in field %}
+                                    <div class="col">
+                                        <label>
+                                            {{subfield}}
+                                            <span>{{ subfield.label.text }}</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row">
+                                <div class="col-12 ta-answer-skip-wrapper">
+                                <a href="#" class="ta-answer-skip"> next > </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+        
+    </form>
+
+    <script>
+        function change_ta_page_number(plus) {
+          var temp_data = parseInt($('#ta-page_number').html());
+          $('#ta-page_number').html(temp_data + plus);
+        }
+      
+        function change_ta(plus) {
+          if (question_slide_current_page + plus <= 18 && question_slide_current_page + plus >= 1) {
+            $('.ta-slide[data-page=' + question_slide_current_page + ']').css('display', 'none');
+            question_slide_current_page += plus;
+            $('.ta-slide[data-page=' + question_slide_current_page + ']').css('display', 'block');
+            change_ta_page_number(plus);
+          }
+          if (question_slide_current_page == 18) {
+            saw_last_question = true;
+          }
+        }
+        question_slide_current_page = 1;
+        saw_last_question = false;
+        $('a.ta-arrow-left:not(.disabled)').click(function() {
+          change_ta(-1);
+        });
+        $('a.ta-arrow-right:not(.disabled)').click(function() {
+          change_ta(1);
+        });
+        $('.ta-answer-skip').click(function(e) {
+          e.preventDefault();
+          change_ta(1);
+        });
+        $('.ta-answer-box > div').click(function(e) {
+          e.preventDefault();
+          var selected_radio_input = $(this).find('input');
+          question_id = selected_radio_input.prop('name');
+          var changing = false;
+          if ($('.ta-answer-box').find('[name="' + question_id + '"]:checked').length > 0) changing = true;
+          cancel_select = $(this).hasClass('selected');
+          nme = $(this).hasClass('nme'); // Not Mutually Exclusive
+          if (nme == false) {
+            $('.ta-answer-box').find('[name="' + question_id + '"]:checked').parent().parent().removeClass('selected');
+            $('.ta-answer-box').find('[name="' + question_id + '"]:checked').removeProp('checked')
+            if (cancel_select == false) {
+              selected_radio_input.prop('checked', 'true');
+              $(this).toggleClass('selected');
+            }
+          } else {
+            if (cancel_select == false) {
+              selected_radio_input.prop('checked', 'true');
+            } else {
+              selected_radio_input.removeProp('checked');
+            }
+            $(this).toggleClass('selected');
+          }
+          if (saw_last_question == false && changing == false && nme == false) change_ta(1);
+        });
+      </script>
+      
+{% endblock %}

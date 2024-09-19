@@ -231,3 +231,179 @@ input[type="radio"]:checked:before {
 div.metrics .metric:nth-child(even) {
     background-color: #F8F8F8;
 }
+
+div.form-field {
+    padding: 0.4rem 0.5rem;
+    overflow: visible;
+}
+
+.tag-attributes {
+    padding: 3em 2em;
+}
+
+.tag-attributes .ta-center {
+    text-align: center;
+}
+
+.tag-attributes .ta-center div {
+    text-align: center;
+}
+
+.tag-attributes .ta-page-info {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.tag-attributes .ta-arrow a {
+    width: 100%;
+}
+
+.tag-attributes .ta-arrow a div {
+    margin: 0 auto;
+}
+
+a.ta-arrow-left, a.ta-arrow-right {
+  cursor: hand;
+}
+
+.disabled .icon-ta-arrow-left {
+    border-right: 1.575em solid #CCC;
+}
+
+.disabled .icon-ta-arrow-right {
+    border-left: 1.575em solid #CCC;
+}
+
+a .icon-ta-arrow, a .icon-ta-arrow-left, a .icon-ta-arrow-right {
+    overflow: visible;
+}
+
+.icon-ta-arrow-left {
+    border-right: 1.575em solid #3496E1;
+}
+
+.icon-ta-arrow, .icon-ta-arrow-left, .icon-ta-arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 0.975em solid transparent;
+    border-bottom: 0.975em solid transparent;
+}
+
+.tag-attributes .ta-question-row {
+    padding: 1em 0;
+  margin-bottom: 20px;
+}
+
+.tag-attributes .ta-question {
+    font-weight: bold;
+}
+
+.tag-attributes .ta-question-subtitle {
+    font-weight: normal;
+  font-size: 0.75em;
+  text-align: center;
+    margin-top: 10px;
+}
+
+.tag-attributes .ta-arrow a div {
+    margin: 0 auto;
+}
+
+.icon-ta-arrow-right {
+    border-left: 1.575em solid #3496E1;
+}
+
+.tag-attributes .ta-answer-box {
+    border-radius: 1.15em;
+    -moz-border-radius: 1.15em;
+    -webkit-border-radius: 1.15em;
+    border: 1px solid #888;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 75%;
+    margin: 0 auto;
+  height: 35px;
+}
+
+.tag-attributes .ta-answer-box > div:first-child {
+  border-right: 1px solid #888;
+}
+
+.tag-attributes .ta-answer-box > div:last-child {
+  border-left: 1px solid #888;
+}
+
+
+.tag-attributes .ta-answer-box div:hover {
+  background-color: #70b5ea;
+  cursor: hand;
+}
+
+.tag-attributes .ta-answer-box div.selected {
+  background-color: #3496E1;
+}
+
+.tag-attributes .ta-answer-box div:hover label {
+  color: #fff;
+}
+
+.tag-attributes .ta-answer-box div.selected label {
+    color: #fff;
+}
+
+.tag-attributes .ta-answer-box div label, .tag-attributes .ta-answer-box div a {
+    display: block;
+    padding: 0.15em;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    color: #3496E1;
+    border: 0;
+    cursor: pointer;
+    height: 100%;
+    vertical-align: middle;
+  padding-top: 8px;
+}
+
+div.form-field label {
+    font-weight: 400;
+    font-size: 0.9em;
+}
+
+.tag-attributes .ta-answer-box div label input[type="radio"], .tag-attributes .ta-answer-box div a input[type="radio"],
+.tag-attributes .ta-answer-box div label input[type="checkbox"], .tag-attributes .ta-answer-box div a input[type="checkbox"] {
+    display: none;
+}
+
+.tag-attributes .ta-answer-box div label.ta-answer-skip,
+.tag-attributes .ta-answer-box div label.ta-answer-skip:hover,
+.tag-attributes .ta-answer-box div a.ta-answer-skip,
+.tag-attributes .ta-answer-box div a.ta-answer-skip:hover {
+    background: none;
+    color: #CCC;
+}
+
+.tag-attributes .ta-answer-box div label.ta-answer-skip, .tag-attributes .ta-answer-box div a.ta-answer-skip {
+    font-weight: normal;
+    line-height: 1.7;
+}
+
+.ta-answer-row .ta-answer-skip-wrapper {
+  text-align: center;
+}
+
+.ta-answer-row .ta-answer-skip {
+  font-size: 0.85em;
+    color: #808080;
+    margin-top: 30px;
+    text-align: center;
+  display: block;
+}
+
+.ta-answer-row .ta-answer-skip:hover {
+  text-decoration: none;
+  cursor: hand;
+  color: #a6a6a6;}

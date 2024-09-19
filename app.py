@@ -1,14 +1,11 @@
 from flask import Flask, render_template, jsonify, request
 from database import load_professors_from_db, store_rating_into_db
 from flask_breadcrumbs import Breadcrumbs, register_breadcrumb
+from form import RatingForm
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = '1234'
 
-professor_rate = [
-    ('r1', 5),
-    ('r2', 7),
-    ('r3', 12)
-]
 @app.route('/')
 def HomePage():
     return render_template('home.html', title="RateYourProfessor")
@@ -41,6 +38,7 @@ def results():
 # Direct page route for selected professor using the PID
 @app.route('/professor/<pid>', methods = ['GET', 'POST'])
 def professor_page(pid):
+    form = RatingForm()
     if request.method == 'POST':
         teaching_quality = request.form.get('rating1')
         grading = request.form.get('rating2')
@@ -67,20 +65,27 @@ def professor_page(pid):
     department = professor["Department"]
     imagesrc = professor["Image"]
     if professor:
-        return render_template("profile.html", professor_name= name, professor_title= title, professor_department = department, professor_image = imagesrc)
+        return render_template("profile.html", professor_name= name, professor_title= title, professor_department = department, professor_image = imagesrc, form = form)
     else:
         return "Professor not found", 404
     
 # @app.route('/department')
 # def 
 
-survay = dict()
-@app.route('/survey')
-def survey():
-    labels = [row[0] for row in professor_rate]
-    values = [row[1] for row in professor_rate]
+# survay = dict()
+# @app.route('/survey')
+# def survey():
+#     labels = [row[0] for row in professor_rate]
+#     values = [row[1] for row in professor_rate]
     
-    return render_template('survey.html', labels = labels, values = values)
+#     return render_template('survey.html', labels = labels, values = values)
+
+
+@app.route("/form", methods = ['GET', 'POST'])
+def test_form():
+    form = RatingForm()
+    
+    return render_template("wtform.html", form = form)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
