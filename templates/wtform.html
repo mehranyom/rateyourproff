@@ -66,14 +66,19 @@
                             </div>
                             <div class="ta-answer-row">
                             <div class="ta-answer-box row">
-                                {% for subfield in field %}
-                                    <div class="col">
-                                        <label>
-                                            {{subfield}}
-                                            <span>{{ subfield.label.text }}</span>
-                                        </label>
-                                    </div>
-                                {% endfor %}
+                              {% for subfield in field %}
+                                <div class="col">
+                                    <label>
+                                        {% if field.type == 'RadioField' %}
+                                            {{subfield}}  <!-- Renders the radio button input -->
+                                        {% elif field.type == 'SelectMultipleField' %}
+                                            <input type="checkbox" name="{{subfield.name}}" value="{{subfield.data}}">
+                                        {% endif %}
+                                        <span>{{ subfield.label.text }}</span>
+                                    </label>
+                                </div>
+                              {% endfor %}
+                          
                             </div>
                             <div class="row">
                                 <div class="col-12 ta-answer-skip-wrapper">
@@ -87,6 +92,14 @@
 
             </div>
         </div>
+        {{ myform.hidden_tag() }}
+    <div>
+        {{ myform.category.label }} <!-- Renders the label "Category" -->
+        {{ myform.category }}       <!-- Renders the select dropdown -->
+        {% if myform.category.errors %}
+            <span class="error">{{ myform.category.errors[0] }}</span>
+        {% endif %}
+    </div>
         
     </form>
 

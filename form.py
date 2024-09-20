@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import RadioField, SubmitField
+from wtforms import RadioField, SubmitField, SelectMultipleField, SelectField
 from wtforms.validators import InputRequired
 
 class RatingForm(FlaskForm):
@@ -31,7 +31,7 @@ class RatingForm(FlaskForm):
     
     personality10 = RadioField('how much does professor answer to questions?', choices=[(1, 'not much'), (2, 'normal'), (3, 'very much')], coerce=int, validators=[InputRequired()], description={'data-page': '10'})
     
-    personality11 = RadioField('study materials?', choices=[(1, 'notes'), (2, 'books'), (3, 'slides')], coerce=int, validators=[InputRequired()], description={'data-page': '11'})
+    personality11 = SelectMultipleField('study materials?', choices=[(1, 'notes'), (2, 'books'), (3, 'slides')], coerce=int, validators=[InputRequired()], description={'data-page': '11'})
     
     personality12 = RadioField('presence and absence', choices=[(1, 'mandatory'), (2, 'optional')], coerce=int, validators=[InputRequired()], description={'data-page': '12'})
     
@@ -48,3 +48,13 @@ class RatingForm(FlaskForm):
     personality18 = RadioField('possibility to fail the course?', choices=[(1, 'yes'), (2, 'no')], coerce=int, validators=[InputRequired()], description={'data-page': '18'})
     
     submit = SubmitField('Submit')
+
+
+class MyForm(FlaskForm):
+    category = SelectField('Category', 
+                           choices=[('tech', 'Technology'), 
+                                    ('sports', 'Sports'), 
+                                    ('music', 'Music'), 
+                                    ('movies', 'Movies')],
+                           default='tech',  # This will pre-select "Technology"
+                           validators=[InputRequired()])
