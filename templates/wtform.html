@@ -2,6 +2,7 @@
 
 {% block content %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/professor.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <form method="post">
         {{ form.hidden_tag() }}
@@ -92,15 +93,21 @@
 
             </div>
         </div>
-        {{ myform.hidden_tag() }}
-    <div>
-        {{ myform.category.label }} <!-- Renders the label "Category" -->
-        {{ myform.category }}       <!-- Renders the select dropdown -->
-        {% if myform.category.errors %}
-            <span class="error">{{ myform.category.errors[0] }}</span>
-        {% endif %}
-    </div>
-        
+        {% for subform in form.Courses %}
+            <div class="col-sm-4 col-sm-push-8">
+                <label>نام درسی که برداشتید؟</label>
+                <select name="{{ subform.course.name }}" class="form-control select2-js" tabindex="-1" aria-hidden="true">
+                    <option value="-1"> --- </option>
+                    {% for value, label in subform.course.choices %}
+                        <option value="{{ value }}" {% if subform.course.data == value %} selected {% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+                
+            </div>
+        {% endfor %}
+
     </form>
 
     <script>
@@ -158,5 +165,39 @@
           if (saw_last_question == false && changing == false && nme == false) change_ta(1);
         });
       </script>
-      
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+      <script type="text/javascript">
+        $select2 = $(".select2-js").select2({
+            width: '100%',
+            escapeMarkup: function (m) {
+                return m;
+            },
+            templateSelection: function (data) {
+                return '<span class="select2-coursegrade-selection">' + data.text + '</span>';
+            },
+            templateResult: function (data) {
+                return '<span class="select2-coursegrade-results">' + data.text + '</span>';
+            }
+        });
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        
+
+    </script>
 {% endblock %}

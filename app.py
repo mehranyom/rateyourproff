@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request
-from database import load_professors_from_db, store_rating_into_db
+from database import load_professors_from_db, store_rating_into_db, load_professor_course_from_db
 from flask_breadcrumbs import Breadcrumbs, register_breadcrumb
-from form import RatingForm, MyForm
+from form import RatingForm
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '1234'
@@ -84,9 +84,12 @@ def professor_page(pid):
 @app.route("/form", methods = ['GET', 'POST'])
 def test_form():
     form = RatingForm()
-    myform = MyForm()
-    
-    return render_template("wtform.html", form = form, myform = myform)
+    course_names = load_professor_course_from_db('003584')
+    course_choices = [(index + 1, course) for index, course in enumerate(course_names)]
+    for subform in form.Courses:
+        subform.course.choices = course_choices
+
+    return render_template("wtform.html", form = form)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

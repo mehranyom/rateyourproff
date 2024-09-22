@@ -8,10 +8,26 @@ db_connection = f"mysql+pymysql://{user}:{password}@{host}/{dbname}?charset=utf8
 engine = create_engine(db_connection)
 
 def load_professors_from_db():
+    query = text("""
+            SELECT *
+            FROM PROFESSORS
+        """)
     with engine.connect() as conn:
-        result = conn.execute(text("select * from professors"))
+        result = conn.execute(query)
         result_all = result.mappings().all()
         return result_all
+    
+def load_professor_course_from_db(pid):
+    query = text("""
+        SELECT DISTINCT CName
+        FROM teaches t, course c
+        WHERE t.CID = c.CID AND PID = :PID
+    """)
+    with engine.connect() as conn:
+        result = conn.execute(query, {"PID": pid})
+        result_all = [row[0] for row in result]
+        return result_all
+
 
 def store_rating_into_db(pid, data):
     with engine.connect() as conn:

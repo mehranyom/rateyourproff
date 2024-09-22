@@ -1,6 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import RadioField, SubmitField, SelectMultipleField, SelectField
-from wtforms.validators import InputRequired
+from wtforms import RadioField, SubmitField, SelectMultipleField, SelectField, IntegerField, FieldList, FormField
+from wtforms.validators import InputRequired, DataRequired
+
+class CourseForm(FlaskForm):
+    course = SelectField('Course', choices=[], validators=[DataRequired()])
+
 
 class RatingForm(FlaskForm):
     rating1 = RadioField('Teaching Quality', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], coerce=int, validators=[InputRequired()], description={'lowest_label': 'Bad', 'highest_label': 'Good'})
@@ -47,14 +51,8 @@ class RatingForm(FlaskForm):
     
     personality18 = RadioField('possibility to fail the course?', choices=[(1, 'yes'), (2, 'no')], coerce=int, validators=[InputRequired()], description={'data-page': '18'})
     
+    Courses = FieldList(FormField(CourseForm), min_entries=1)
+
     submit = SubmitField('Submit')
 
 
-class MyForm(FlaskForm):
-    category = SelectField('Category', 
-                           choices=[('tech', 'Technology'), 
-                                    ('sports', 'Sports'), 
-                                    ('music', 'Music'), 
-                                    ('movies', 'Movies')],
-                           default='tech',  # This will pre-select "Technology"
-                           validators=[InputRequired()])
