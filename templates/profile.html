@@ -10,11 +10,11 @@
                     <div class="card">
                         <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="{{professor_image}}" alt="Admin" class="rounded-circle" width="150">
+                            <img src="{{professor['Image']}}" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
-                            <h4>{{professor_name}}</h4>
-                            <p class="text-secondary mb-1">{{professor_title}}</p>
-                            <p class="text-muted font-size-sm">{{professor_department}}</p>
+                            <h4>{{professor['Name']}}</h4>
+                            <p class="text-secondary mb-1">{{professor['Title']}}</p>
+                            <p class="text-muted font-size-sm">{{professor['Department']}}</p>
                             <button class="btn btn-primary">Follow</button>
                             <button class="btn btn-outline-primary">Message</button>
                             </div>
@@ -112,7 +112,7 @@
                                                                 <div class="{{'col' if field.type == 'RadioField' else 'col nme'}}">
                                                                     <label>
                                                                         {% if field.type == 'RadioField' %}
-                                                                            {{subfield}}  <!-- Renders the radio button input -->
+                                                                            {{subfield}}
                                                                         {% elif field.type == 'SelectMultipleField' %}
                                                                             <input type="checkbox" name="{{subfield.name}}" value="{{subfield.data}}">
                                                                         {% endif %}
@@ -133,6 +133,38 @@
                             
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row coursegrade" notsubmitted="true">
+                                                {% for subform in form.Courses %}
+                                                  <div class="col-sm-4 col-sm-push-8">
+                                                      <label>your course with professor?</label>
+                                                      <div>
+                                                          <select name="{{ subform.course.name }}" class="form-control select2-js" tabindex="-1" aria-hidden="true">
+                                                              <option value="-1"> --- </option>
+                                                              {% for value, label in subform.course.choices %}
+                                                                  <option value="{{ value }}" {% if subform.course.data == value %} selected {% endif %}>
+                                                                      {{ label }}
+                                                                  </option>
+                                                              {% endfor %}
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                                {% endfor %}
+                                    <div class="col-sm-1 col-sm-pull-11 visually-hidden remove-col">
+                                        <label> حذف </label>
+                                        <div style="text-align: center;">
+                                          <i class="fa fa-minus-circle remove-coursegrade-row"></i>
+                                        </div>
+                                    </div>
+                                            </div>
+                                            <a href="#" class="more-coursegrade">
+                                                <i class="fa fa-plus"></i>
+                                                did you have another course?
+                                            </a>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                           </div>
@@ -151,5 +183,12 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://kit.fontawesome.com/d235b914c5.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <script src= "{{ url_for('static', filename='js/personality-pagination.js') }}"></script>
+
+
 {% endblock %}

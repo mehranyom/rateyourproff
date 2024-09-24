@@ -51,3 +51,71 @@ function change_ta_page_number(plus) {
     }
     if (saw_last_question == false && changing == false && nme == false) change_ta(1);
   });
+
+  $('.more-coursegrade').click(function(e) {
+    e.preventDefault();
+    var baseCoursegrade = $('.coursegrade').clone().first().insertBefore('.more-coursegrade');
+    baseCoursegrade.find('.select2').remove();
+    baseCoursegrade.find('.visually-hidden').removeClass('visually-hidden');
+    baseCoursegrade.find('[selected=selected]').removeAttr('selected');
+    baseCoursegrade.attr('notsubmitted', 'true');
+    $select2 = $(".select2-js").select2({
+      width: '100%',
+      escapeMarkup: function (m) {
+          return m;
+      },
+      templateSelection: function (data) {
+          return '<span class="select2-coursegrade-selection">' + data.text + '</span>';
+      },
+      templateResult: function (data) {
+          return '<span class="select2-coursegrade-results">' + data.text + '</span>';
+      }
+    });
+    
+  });
+
+  $(document).on('click', '.remove-coursegrade-row', function(e) {
+    var $row = $(this).parent().parent().parent();
+    if (!$row.attr('notsubmitted')) {
+      if ($(".review-form").find('.coursegrade').length == 1) {
+        $('.more-coursegrade').click();
+        $row.remove();
+        $('.coursegrade .remove-col').addClass('visually-hidden');
+      } else {
+        $row.remove();
+      }
+    } else {
+      $row.remove();
+    }
+  });
+
+  $select2 = $(".select2-js").select2({
+    width: '100%',
+    escapeMarkup: function (m) {
+        return m;
+    },
+    templateSelection: function (data) {
+        return '<span class="select2-coursegrade-selection">' + data.text + '</span>';
+    },
+    templateResult: function (data) {
+        return '<span class="select2-coursegrade-results">' + data.text + '</span>';
+    }
+});
+
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}

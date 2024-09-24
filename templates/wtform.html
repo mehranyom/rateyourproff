@@ -2,6 +2,9 @@
 
 {% block content %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/professor.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <form method="post">
@@ -93,111 +96,43 @@
 
             </div>
         </div>
-        {% for subform in form.Courses %}
-            <div class="col-sm-4 col-sm-push-8">
-                <label>نام درسی که برداشتید؟</label>
-                <select name="{{ subform.course.name }}" class="form-control select2-js" tabindex="-1" aria-hidden="true">
-                    <option value="-1"> --- </option>
-                    {% for value, label in subform.course.choices %}
-                        <option value="{{ value }}" {% if subform.course.data == value %} selected {% endif %}>
-                            {{ label }}
-                        </option>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row coursegrade" notsubmitted="true">
+                    {% for subform in form.Courses %}
+                      <div class="col-sm-4 col-sm-push-8">
+                          <label>your course with professor?</label>
+                          <div>
+                              <select name="{{ subform.course.name }}" class="form-control select2-js" tabindex="-1" aria-hidden="true">
+                                  <option value="-1"> --- </option>
+                                  {% for value, label in subform.course.choices %}
+                                      <option value="{{ value }}" {% if subform.course.data == value %} selected {% endif %}>
+                                          {{ label }}
+                                      </option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+                      </div>
                     {% endfor %}
-                </select>
-                
+        <div class="col-sm-1 col-sm-pull-11 visually-hidden remove-col">
+            <label> حذف </label>
+            <div style="text-align: center;">
+              <i class="fa fa-minus-circle remove-coursegrade-row"></i>
             </div>
-        {% endfor %}
-
-    </form>
-
-    <script>
-        function change_ta_page_number(plus) {
-          var temp_data = parseInt($('#ta-page_number').html());
-          $('#ta-page_number').html(temp_data + plus);
-        }
-      
-        function change_ta(plus) {
-          if (question_slide_current_page + plus <= 18 && question_slide_current_page + plus >= 1) {
-            $('.ta-slide[data-page=' + question_slide_current_page + ']').css('display', 'none');
-            question_slide_current_page += plus;
-            $('.ta-slide[data-page=' + question_slide_current_page + ']').css('display', 'block');
-            change_ta_page_number(plus);
-          }
-          if (question_slide_current_page == 18) {
-            saw_last_question = true;
-          }
-        }
-        question_slide_current_page = 1;
-        saw_last_question = false;
-        $('a.ta-arrow-left:not(.disabled)').click(function() {
-          change_ta(-1);
-        });
-        $('a.ta-arrow-right:not(.disabled)').click(function() {
-          change_ta(1);
-        });
-        $('.ta-answer-skip').click(function(e) {
-          e.preventDefault();
-          change_ta(1);
-        });
-        $('.ta-answer-box > div').click(function(e) {
-          e.preventDefault();
-          var selected_radio_input = $(this).find('input');
-          question_id = selected_radio_input.prop('name');
-          var changing = false;
-          if ($('.ta-answer-box').find('[name="' + question_id + '"]:checked').length > 0) changing = true;
-          cancel_select = $(this).hasClass('selected');
-          nme = $(this).hasClass('nme'); // Not Mutually Exclusive
-          if (nme == false) {
-            $('.ta-answer-box').find('[name="' + question_id + '"]:checked').parent().parent().removeClass('selected');
-            $('.ta-answer-box').find('[name="' + question_id + '"]:checked').removeProp('checked')
-            if (cancel_select == false) {
-              selected_radio_input.prop('checked', 'true');
-              $(this).toggleClass('selected');
-            }
-          } else {
-            if (cancel_select == false) {
-              selected_radio_input.prop('checked', 'true');
-            } else {
-              selected_radio_input.removeProp('checked');
-            }
-            $(this).toggleClass('selected');
-          }
-          if (saw_last_question == false && changing == false && nme == false) change_ta(1);
-        });
-      </script>
-      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-      <script type="text/javascript">
-        $select2 = $(".select2-js").select2({
-            width: '100%',
-            escapeMarkup: function (m) {
-                return m;
-            },
-            templateSelection: function (data) {
-                return '<span class="select2-coursegrade-selection">' + data.text + '</span>';
-            },
-            templateResult: function (data) {
-                return '<span class="select2-coursegrade-results">' + data.text + '</span>';
-            }
-        });
-
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
+        </div>
+                </div>
+                <a href="#" class="more-coursegrade">
+                    <i class="fa fa-plus"></i>
+                    did you have another course?
+                </a>
+            </div>
+        </div>
         
 
-    </script>
+    </form>
+    <script src="https://kit.fontawesome.com/d235b914c5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src= "{{ url_for('static', filename='js/personality-pagination.js') }}"></script>
+
 {% endblock %}

@@ -1,11 +1,15 @@
 from sqlalchemy import create_engine, text
+
 user = 'root'
 password = 'Qwertyuiop123%40'
 host = 'localhost'
 dbname = 'polito'
 db_connection = f"mysql+pymysql://{user}:{password}@{host}/{dbname}?charset=utf8mb4"
 
+
+
 engine = create_engine(db_connection)
+
 
 def load_professors_from_db():
     query = text("""
@@ -26,6 +30,16 @@ def load_professor_course_from_db(pid):
     with engine.connect() as conn:
         result = conn.execute(query, {"PID": pid})
         result_all = [row[0] for row in result]
+        return result_all
+
+def load_all_course_from_db():
+    query = text("""
+        SELECT DISTINCT CName
+        FROM course
+    """)
+    with engine.connect() as conn:
+        result = conn.execute(query)
+        result_all = result.mappings().all()
         return result_all
 
 
