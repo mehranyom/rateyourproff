@@ -89,9 +89,8 @@ def test_form():
     course_names = load_professor_course_from_db('003584')
     course_choices = [(index + 1, course) for index, course in enumerate(course_names)]
     course_choices.append((0, 'Other'))  # Add the "Other" option
-
-    for subform in form.Courses:
-        subform.course.choices = course_choices
+    course_subform = form.Courses[0]
+    course_subform.course.choices = course_choices
 
     return render_template("wtform.html", form = form)
 

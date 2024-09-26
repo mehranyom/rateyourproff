@@ -100,32 +100,46 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row coursegrade" notsubmitted="true">
-                    {% for subform in form.Courses %}
-                      <div class="col-sm-4 col-sm-push-8">
-                          <label>your course with professor?</label>
-                          <div>
-                              <select name="{{ subform.course.name }}" class="form-control select2-js" tabindex="-1" aria-hidden="true">
-                                  <option value="-1"> --- </option>
-                                  {% for value, label in subform.course.choices %}
-                                      <option value="{{ value }}" {% if subform.course.data == value %} selected {% endif %}>
-                                          {{ label }}
-                                      </option>
-                                  {% endfor %}
-                              </select>
-                          </div>
-                      </div>
-                    {% endfor %}
-        <div class="col-sm-1 col-sm-pull-11 visually-hidden remove-col">
-            <label> حذف </label>
-            <div style="text-align: center;">
-              <i class="fa fa-minus-circle remove-coursegrade-row"></i>
-            </div>
-        </div>
+                    {% set subform = form.Courses[0] %}
+                    <div class="row">
+                        {% for field_name, field in subform._fields.items() %}
+                            {% if field_name != 'csrf_token' %}
+                            <div class="{{ field.render_kw.col }}">
+                                <label>{{ field.label.text }}</label>
+                                <div>
+                                    <select name="{{ field.name }}" class="{{ field.render_kw.class }}" tabindex="-1" aria-hidden="true">
+                                        <option value="-1"> --- </option>
+                                        {% for value, label in field.choices %}
+                                            <option value="{{ value }}" {% if field.data == value %} selected {% endif %}>
+                                                {{ label }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    
+                    <div class="col-sm-1 col-sm-pull-11 visually-hidden remove-col">
+                        <label> حذف </label>
+                        <div style="text-align: center;">
+                        <i class="fa fa-minus-circle remove-coursegrade-row"></i>
+                        </div>
+                    </div>
                 </div>
                 <a href="#" class="more-coursegrade">
                     <i class="fa fa-plus"></i>
                     did you have another course?
                 </a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form.review.label }}
+                {{ form.review(size=20, placeholder=form.review.render_kw['placeholder'] % professor['Name']) }}
             </div>
         </div>
         
