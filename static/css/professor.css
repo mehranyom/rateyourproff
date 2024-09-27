@@ -2,7 +2,7 @@ body{
     margin-top:20px;
     color: #1a202c;
     text-align: left;
-    background-color: #e2e8f0;    
+    background-color: #ffffff;    
 }
 .main-body {
     padding: 15px;
@@ -52,7 +52,28 @@ body{
     box-shadow: none!important;
 }
 
-.nav-item{
+hr{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+    opacity: 1;
+}
+
+.nav-tabs.nav-justified{
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav-tabs .nav-link:hover {
+    isolation: isolate;
+    background-color: #cbcbcb;
+    color: #1d00bf;
+}
+
+/* .nav-item{
     width: 50%;
 }
 
@@ -60,9 +81,13 @@ body{
     width: 100%;
 }
 
+.nav-tabs{
+    margin-left: 20px;
+    margin-right: 20px;
+}
 .nav-tabs .nav-link{
     width: 100%;
-}
+} */
 
 div.metrics {
     padding: 0;
@@ -466,4 +491,84 @@ div.form-field label {
 	margin-top: 20px;
     font-size: 11px;
 	display: inline-block;
+}
+
+/*======================= Tab Content */
+
+@media screen and (max-width:992px){
+	.tab-panel {
+		margin-top: 30px;
+	}
+}
+
+.tab-content {
+	background-color: #fff;
+	border-radius: 8px;
+	margin-right: 20px;
+	margin-left: 20px;
+	box-shadow: 0 3px 0 0 #d4d4d5,0 0 0 1px #d4d4d5;
+	padding: 30px 15px 15px 15px;
+	min-height: 575px;
+}
+
+/*========================*/
+
+.tags {
+	margin-top: 30px;
+}
+
+a.tag-link {
+	padding: 2 15px;
+	line-height: 26px;
+	border: 1px solid #797979;
+	display: inline-block;
+	margin-bottom: 10px;
+	margin-left: 3px;
+	color: #797979;
+	text-decoration: none;
+	transition: all 0.4s ease 0s;
+	-webkit-transition: all 0.4s ease 0s;
+}
+
+a.tag-link:visited {
+	border-color: #797979;
+	color: #797979;
+	text-decoration: none;
+}
+
+a.tag-link:link {
+	border-color: #797979;
+	color: #797979;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 992px){
+	a.tag-link {
+		font-size: 2em;
+    	padding: 20px;
+	}
+}
+
+a.tag-link:active {
+	border-color: #797979;
+	color: #797979;
+	text-decoration: none;
+}
+
+a.tag-link:hover {
+	color: #ff5a5f;
+	border-color: #ff5a5f;
+	text-decoration: none;
+}
+
+a.tag-link.tag-selected {
+	background-color: #ff5a5f;
+	border-color: #ff5a5f;
+	color: white;
+}
+
+a.tag-link.tag-choosed {
+	background-color: #FFADB0;
+	border-color: #ff5a5f;
+	color: white;
 }

@@ -4,12 +4,12 @@ from wtforms.validators import InputRequired, DataRequired
 
 class CourseForm(FlaskForm):
     course = SelectField('your course with professor?', choices=[], validators=[DataRequired()], render_kw={"class": "form-control select2-js", "col": "col-sm-4 col-sm-push-8"})
-    year = SelectField('which year?', choices=[(year, str(year - 1) + '/' + str(year)) for year in range(2025, 2000, -1)], validators=[DataRequired()], render_kw={"class": "form-control select2-js", "col": "col-sm-2 col-sm-push-2"})
-    semester = SelectField('which semester?', choices=[(1, '1'), (2, '2')], validators=[DataRequired()], render_kw={"class": "form-control select2-js", "col": "col-sm-2 col-sm-pull-2"})
+    year = SelectField('year?', choices=[(year, str(year - 1) + '/' + str(year)) for year in range(2025, 2000, -1)], validators=[DataRequired()], render_kw={"class": "form-control select2-js", "col": "col-sm-2 col-sm-push-2"})
+    semester = SelectField('semester?', choices=[(1, '1'), (2, '2')], validators=[DataRequired()], render_kw={"class": "form-control select2-js", "col": "col-sm-2 col-sm-pull-2"})
     grade_choices = [(mark, str(mark)) for mark in range(30, 17, -1)]
     grade_choices.insert(0, (31, '30L'))
     grade_choices.append((17, 'Failed'))
-    grade = SelectField('your final mark?', choices=grade_choices, validators=[DataRequired()], render_kw={"class": "form-control select2-js", "col": "col-sm-3 col-sm-pull-7"})
+    grade = SelectField('final mark?', choices=grade_choices, validators=[DataRequired()], render_kw={"class": "form-control select2-js", "col": "col-sm-3 col-sm-pull-7"})
     
 class RatingForm(FlaskForm):
     rating1 = RadioField('Teaching Quality', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], coerce=int, validators=[InputRequired()], description={'lowest_label': 'Bad', 'highest_label': 'Good'})
